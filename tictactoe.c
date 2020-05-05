@@ -1,8 +1,11 @@
+/*******************************Tic Tac Toe                                     Developed by @rahulsharmar1 aka RS*******************************/
+
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
 #include <string.h>
 
+//Functions Declared
 int showboard(char a[]);
 int mark(int m, char a[], char p);
 int checkwin(char a[]);
@@ -10,13 +13,16 @@ int checkwin(char a[]);
  int main()
 {
 	/****************Game STARTS****************/
+	//Variables Declared
 	int choice,mrk,ck,i,win,chance;
 	char player[3];
 	char xo[10];
 	int start;
 	
+	//Game Loop
 	while(1)
 	{
+		//Variables Initalised
 		choice=0;
 		mrk=0;
 		ck=0;
@@ -124,7 +130,6 @@ int checkwin(char a[]);
 			getch();
 			system("cls");
 			return 0;
-			/****************Game ENDS****************/
 
 		}
 
@@ -147,7 +152,9 @@ int checkwin(char a[]);
 	
 	return 0;
 }
+/***************************************************Game Ends***************************************************/
 
+/*******************************************************Functions Definations Starts*******************************************************/
 
 int showboard(char a[])
 {
@@ -266,3 +273,8 @@ int checkwin(char a[])
 	/*************************************XXX Diagonal Win XXX*************************************/
 	return 1;
 }
+
+/*******************************************************Functions Ends*******************************************************/
+
+
+/*******************************************************************Program Ends*******************************************************************/
