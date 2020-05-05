@@ -2,125 +2,152 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <string.h>
+
 int showboard(char a[]);
 int mark(int m, char a[], char p);
 int checkwin(char a[]);
-int main()
+
+ int main()
 {
-/****************Game STARTS****************/
-	int choice,mrk,ck,i,win,chance,agn;
+	/****************Game STARTS****************/
+	int choice,mrk,ck,i,win,chance;
 	char player[3];
 	char xo[10];
-/**********Intro and Choice - Page 1**********/
-	strt:
+	int start;
 	
-	choice=0;
-	mrk=0;
-	ck=0;
-	win=1;
-	chance=0;
-	strcpy(player,"  ");
-	strcpy(xo,"123456789");
-
-	printf("TicTacToe X|O\t\tBy RS\n");
-	while(choice==0)
+	while(1)
 	{
-		printf("Player 1\nSelect Between X O\n");
-		printf("1. X\n2. O\n:  ");
-		scanf("%d",&choice);
-		choice=(int)choice;
-		if (choice==1||choice==2)
-		{
-			player[0]=(choice==1)?'X':'O';
-			player[1]=(choice==1)?'O':'X';
-		}
-		else
-		{
-		printf("\nInvalid Choice!!\n\n");
 		choice=0;
-		}
-	}
-	printf("\n\nYour Choice is %c",player[0]);
-	printf("\nPlayer 1 : %c\nPlayer 2 : %c",player[0],player[1]);
-	printf("\n\n\nPress any key to continue...");
-	getch();
-	system("cls");
-/****************Page 1 ENDS****************/
+		mrk=0;
+		ck=0;
+		win=1;
+		chance=0;
+		strcpy(player,"  ");
+		strcpy(xo,"123456789");
+		start=0;
 
-/**********How to Play - Page 2**********/
-	printf("TicTacToe X|O\t\tBy RS\n");
-	printf("\n\nHow To Play:-\n\n");
-	showboard(xo);
-	printf("\n\nInput Like This");
-	printf("\n\n\nPress any key to continue...");
-	getch();
-	system("cls");
-/****************Page 2 ENDS****************/
+		/**********Starting - Page**********/
+		printf("TicTacToe X|O\t\tBy RS\n");
+		printf("\n\n1. Start Game\n2. Exit\n: ");
+		scanf("%d",&start);
 
-/**********Game Starts - Page 3**********/
-	strcpy(xo,"         ");
-	while(chance<9 && win!=0)
-	{
-		for (i = 0; i < 2 && win!=0 && chance<9; ++i)
+
+
+		if (start==1)
 		{
-			again:
+
+			system("cls");
+			/**********Intro and Choice - Page 1**********/
 			printf("TicTacToe X|O\t\tBy RS\n");
-			showboard(xo);
-			printf("\n\nEnter where to mark Player %d : ",i+1);
-			scanf("%d",&mrk);
-			if (mrk>0 && mrk<=9)
+			while(choice==0)
 			{
-				ck=mark(mrk,xo,player[i]);
-				if (ck==1)
+				printf("\n\nPlayer 1\nSelect Between X O\n");
+				printf("1. X\n2. O\n:  ");
+				scanf("%d",&choice);
+				choice=(int)choice;
+				if (choice==1||choice==2)
 				{
-					goto again;
+				player[0]=(choice==1)?'X':'O';
+				player[1]=(choice==1)?'O':'X';
 				}
+				else
+				{
+					system("cls");
+					printf("\nInvalid Choice!!\n\n");
+					choice=0;
+				}
+			}
+			printf("\n\nYour Choice is %c",player[0]);
+			printf("\nPlayer 1 : %c\nPlayer 2 : %c",player[0],player[1]);
+			printf("\n\n\nPress any key to continue...");
+			getch();
+			system("cls");
+			/****************Page 1 ENDS****************/
+
+			/**********How to Play - Page 2**********/
+			printf("TicTacToe X|O\t\tBy RS\n");
+			printf("\n\nHow To Play:-\n\n");
+			showboard(xo);
+			printf("\n\nInput Like This");
+			printf("\n\n\nPress any key to continue...");
+			getch();
+			system("cls");
+			/****************Page 2 ENDS****************/
+
+			/**********Game Starts - Page 3**********/
+			strcpy(xo,"         ");
+			while(chance<9 && win!=0)
+			{
+				for (i = 0; i < 2 && win!=0 && chance<9; ++i)
+				{
+					again:
+					printf("TicTacToe X|O\t\tBy RS\n");
+					showboard(xo);
+					printf("\n\nEnter where to mark Player %d : ",i+1);
+					scanf("%d",&mrk);
+					if (mrk>0 && mrk<=9)
+					{
+						system("cls");
+						ck=mark(mrk,xo,player[i]);
+						if (ck==1)
+						{
+							goto again;
+						}
+					}
+					else
+					{
+						system("cls");
+						printf("\nEnter Right Choice. Between 1 To 9...\n\n");
+						mrk=0;
+					}
+					chance++;
+					win=checkwin(xo);
+				}
+			}
+			if (win==0)
+			{
+				system("cls");
+				printf("TicTacToe X|O\t\tBy RS\n");
+				showboard(xo);
+				printf("\nPlayer %d Wins the Game\n",i);
 			}
 			else
 			{
-				printf("\nEnter Right Choice. Between 1 To 9...\n\n");
-				mrk=0;
+				system("cls");
+				printf("TicTacToe X|O\t\tBy RS\n");
+				showboard(xo);
+				printf("\nMatch Draws\n");
 			}
-			chance++;
-			win=checkwin(xo);
-		}
-	}
-	if (win==0)
-	{
-		system("cls");
-		printf("TicTacToe X|O\t\tBy RS\n");
-		showboard(xo);
-		printf("\nPlayer %d Wins the Game\n",i);
-	}
-	else
-	{
-		system("cls");
-		printf("TicTacToe X|O\t\tBy RS\n");
-		showboard(xo);
-		printf("\nMatch Draws\n");
-	}
-/****************Page 3 ENDS****************/
+			/****************Page 3 ENDS****************/
 
-	printf("\n\n\nPress any key to continue...");
-	getch();
-	system("cls");
-	printf("\n\nWant to play again? (Press 1) Or Exit by entering 2!! : ");
-	scanf("%d",&agn);
-	if (agn==1)
-	{
-		system("cls");
-		goto strt;
-		
+			printf("\n\n\nPress any key to continue...");
+			getch();
+			system("cls");
+			return 0;
+			/****************Game ENDS****************/
+
+		}
+
+
+
+		else if (start==2)
+		{
+			system("cls");
+			printf("Thank You!!!\n\nPress any key to continue.....");
+			getch();
+			exit(0);
+		}
+		else
+		{
+			system("cls");
+			printf("Enter Right Choice!!!\n\n\n");
+		}
+		/****************Starting Page ENDS****************/
 	}
-	else
-	{
-		printf("\nThank You For Playing..");
-		printf("\n\n\nPress any key to continue...");
-	}
-	getch();
+	
 	return 0;
-/****************Game ENDS****************/
 }
+
 
 int showboard(char a[])
 {
@@ -143,6 +170,7 @@ int mark(int m, char a[], char p)
 {
 	if (a[m-1]=='X' || a[m-1]=='O')
 	{
+		system("cls");
 		printf("\n\nAlerdy Used!!!!\n\n");
 
 		return 1;
